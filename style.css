@@ -38,3 +38,14 @@
 .field:hover {
     cursor: pointer;
 }
+
+#winner {
+
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold
+}
+
+#restart {
+  font-weight: bold;
+}
