@@ -1,4 +1,4 @@
-const gameBoard  = (() => {
+let gameBoard  = (() => {
     const _board = new Array(9)
     return _board
     }
@@ -30,8 +30,14 @@ const game = ((choice) => {
                 board[i].textContent = gameBoard[i]
             }
 
-            if (checkWinner(player1)){return document.getElementById("winner").innerText = checkWinner(player1)}
-            if (checkWinner(player2)){return document.getElementById("winner").innerText = checkWinner(player2)}
+            //if (checkWinner()){return document.getElementById("winner").innerText ="It's a Draw!"}
+            if (checkWinner(player1)){
+                document.getElementById("restart").style.visibility = "visible"
+                return document.getElementById("winner").innerText = checkWinner(player1)}
+            if (checkWinner(player2)){
+                document.getElementById("restart").style.visibility = "visible"
+                return document.getElementById("winner").innerText = checkWinner(player2)}
+            
           
            
 
@@ -58,9 +64,33 @@ function checkWinner(player){
     if (gameBoard[1]==player.marker && gameBoard[4]==player.marker && gameBoard[7]==player.marker){return(`${player.name} Wins`)}
     if (gameBoard[2]==player.marker && gameBoard[4]==player.marker && gameBoard[6]==player.marker){return(`${player.name} Wins`)}
     if (gameBoard[3]==player.marker && gameBoard[4]==player.marker && gameBoard[5]==player.marker){return(`${player.name} Wins`)}
+
+    if(
+        gameBoard[0]!=undefined 
+        && gameBoard[1]!=undefined 
+        && gameBoard[2]!=undefined 
+        && gameBoard[3]!=undefined 
+        && gameBoard[4]!=undefined 
+        && gameBoard[5]!=undefined 
+        && gameBoard[6]!=undefined 
+        && gameBoard[7]!=undefined 
+        && gameBoard[8]!=undefined 
+
+        ) {
+            document.getElementById("restart").style.visibility = "visible"
+            return ("It's a Draw!")
+        }
+    
 }
 
 function restart(){
+    document.getElementById("restart").style.visibility="hidden"
     document.getElementById("winner").innerText=""
-    console.log("fuck")
+    gameBoard = new Array(9)
+    let board = document.getElementsByClassName("field")
+    for (let i=0; i<board.length; i++){
+        board[i].textContent = ''
+    }
+
+    
 }
