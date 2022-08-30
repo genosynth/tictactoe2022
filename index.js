@@ -4,6 +4,9 @@ let gameBoard  = (() => {
     }
 )()
 
+let toggle = true // TRUE means 1 player1 while FALSE means 2 Player
+
+
 
 const PlayerFactory = (marker,name) => {
     this.marker = marker;
@@ -17,33 +20,43 @@ const player2 =  PlayerFactory("O","Player 2")
 
 
 const game = ((choice) => {
-    //let choice = player1.marker
+    
     let board = document.getElementsByClassName("field")
     for (let i=0; i<board.length; i++){
-         
-    
+             
         board[i].addEventListener("click", ()=>{
+           
             if (gameBoard[i]!=undefined || document.getElementById("winner").innerText.length>1){return} //This is to check for already marked boxes and if there is a winner 
+            
             gameBoard[i] = choice
-            console.log(board)
+            
+           
             for  (let i=0; i<board.length; i++){
                 board[i].textContent = gameBoard[i]
             }
 
-            //if (checkWinner()){return document.getElementById("winner").innerText ="It's a Draw!"}
+            //Draw is checked in the checkWinner function
             if (checkWinner(player1)){
                 document.getElementById("restart").style.visibility = "visible"
                 return document.getElementById("winner").innerText = checkWinner(player1)}
+            
+           if (toggle)  {
+            if (choice == player2.marker){
+                
+            }
+            cpuPlays()}
+
+                        
             if (checkWinner(player2)){
                 document.getElementById("restart").style.visibility = "visible"
-                return document.getElementById("winner").innerText = checkWinner(player2)}
+                 document.getElementById("winner").innerText = checkWinner(player2)}
             
           
            
-
-           if (choice==player2.marker){ return choice=player1.marker}
-           if (choice==player1.marker){ return choice=player2.marker}
-           
+            if (!toggle){ 
+                if (choice==player2.marker){ return choice=player1.marker}
+                if (choice==player1.marker){ return choice=player2.marker}
+         }         
             
            
         })
@@ -54,6 +67,23 @@ const game = ((choice) => {
 
 }
 )(player1.marker)
+
+function cpuPlays(){
+   
+    let random = Math.floor(Math.random() * 9);
+    while (gameBoard[random] != undefined) {
+        random = Math.floor(Math.random() * 9);
+      }
+
+    gameBoard[random] = player2.marker
+   
+    let board = document.getElementsByClassName("field")
+    for  (let i=0; i<board.length; i++){
+        board[i].textContent = gameBoard[i]
+    }
+
+
+}
 
 function checkWinner(player){
     if (gameBoard[0]==player.marker && gameBoard[1]==player.marker && gameBoard[2]==player.marker){return(`${player.name} Wins`)}
@@ -90,6 +120,24 @@ function restart(){
     let board = document.getElementsByClassName("field")
     for (let i=0; i<board.length; i++){
         board[i].textContent = ''
+    }
+
+    
+}
+
+function changeGame() {
+        
+        if (toggle==true){
+       
+        document.getElementsByClassName("toggle")[0].innerText = "1 Player"
+        restart()
+        return toggle= false
+    }
+
+    if (toggle==false){
+        document.getElementsByClassName("toggle")[0].innerText = "2 Players"
+        restart()
+        return toggle = true
     }
 
     

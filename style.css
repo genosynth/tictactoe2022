@@ -72,3 +72,16 @@ h1 {
 #restart:hover {
     background-color: rgb(224, 224, 224);
 }
+
+.toggle {
+    border: solid 2px;
+    border-radius: 5%;
+    width: fit-content;
+    padding: 1%;
+    cursor: pointer;
+}
+
+.toggle:hover {
+    background-color: rgb(224, 224, 224);
+
+}
