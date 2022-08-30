@@ -136,7 +136,7 @@ function changeGame() {
 
     if (toggle==false){
         document.getElementsByClassName("toggle")[0].innerText = "2 Players"
-        restart()
+        window.location.reload() // THIS IS JUST A QUICK FIX FOR THE BUG
         return toggle = true
     }
 
